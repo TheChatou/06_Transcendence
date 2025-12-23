@@ -848,6 +848,15 @@
            text-center;
   }
 
+  .biggy-btn-click {
+    @apply text-black p-4 font-arcade
+           border-black
+           border-t-1 border-l-1 border-r-4 border-b-6
+            hover:border-r-7 hover:border-b-8 hover:border-t-0 hover:border-l-0
+           text-base lg:text-lg xl:text-lg xxl:text-xl
+           text-center;
+  }
+
   .in-dark-box {
     @apply  text-white text-4xl 
            font-im-double uppercase text-center;

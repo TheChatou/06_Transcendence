@@ -422,7 +422,7 @@ export function ChoseTournament(): HTMLElement {
     boxKids.append(photo);
 
     // 2) Top Player
-    const tCodeBox = el("div", "mix-blend-multiply relative grid grid-cols-3 gap-6 mb-6 items-center justify-items-center text-center");
+    const tCodeBox = el("div", "mix-blend-multiply relative grid grid-cols-[1fr_1fr_1fr] items-center justify-items-center");
     const picBox = el("div", "img-newspaper flex items-center justify-center");
     const creators = el("img", "");
     creators.src = "/imgs/creators.jpg";
@@ -437,10 +437,11 @@ export function ChoseTournament(): HTMLElement {
     const cupIcon = el("img", "relative h-auto w-auto max-h-24 max-w-24") as HTMLImageElement;
         cupIcon.src = "/imgs/trophy.png";
 
-// 3) Tournament Code        
-    const tournamentCode = el("div", "box-dark img-newspaper text-white text-center text-2xl -m-4 font-im-double uppercase");
-    tournamentCode.append(text(`Enter your Tournament Code Here`));
-    const inputAndBtn = el("div", "grid grid-cols-[70%_30%] flex justify-center items-center gap-2 mx-auto my-4");
+// 3) Tournament Code  
+    const tournamentBox = el("div", "box-dark img-newspaper mx-4 flex flex-col items-center justify-center");
+    const tournamentCode = el("div", "text-white text-center text-2xl font-ka1 uppercase m-4");
+    tournamentCode.append(text(`Access Your Tournament`));
+    const inputAndBtn = el("div", "grid grid-cols-[1fr_1fr] justify-center items-center gap-2 mx-auto");
     const codeInput = el("input", "btn-input") as HTMLInputElement;
     codeInput.type = "text";
     codeInput.placeholder = "Tournament Code";
@@ -456,10 +457,10 @@ export function ChoseTournament(): HTMLElement {
         window.location.href = `#/tournament/classic/${code}`;
     });
     inputAndBtn.append(codeInput, codeSubmit);
-
     tournamentCode.append(inputAndBtn);
-    
-    tCodeBox.append(profilePic, tournamentCode, cupIcon);
+
+    tournamentBox.append(tournamentCode);
+    tCodeBox.append(profilePic, tournamentBox, cupIcon);
     header.append(boxKids, tCodeBox, picBox);
 
 /********* SPACER *********/

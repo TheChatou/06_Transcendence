@@ -57,11 +57,11 @@ function makeSidebarItem(href: string, titleText: string, bodyText: string): HTM
     const title = el("h3", `font-oldprint -tracking-[0.02em] text-center
         uppercase
         text-lg lg:text-lg
-        xxl:text-2xl
+        xxl:text-4xl xl:text-2xl
         group-hover:underline font-oldprint-extravagant`);
     title.append(text(titleText));
 
-    const body = el("p", `font-hello-print text-sm xxl:text-xl text-justify
+    const body = el("p", `font-hello-print text-sm xl:text-base xxl:text-2xl text-justify
         group-hover:bg-stone-900 group-hover:text-white`);
     body.append(text(bodyText));
 
@@ -257,25 +257,25 @@ export function Home(): HTMLElement {
 
     const navPlay = makeSidebarItem(
         "#/game",
-        "- GAME ON -",
+        "- GAME -",
         "Anonymous sources confirm that a fully functional Pong arena is hidden behind this link. Side effects may include shouting at pixels."
     );
 
     const navLogin = makeSidebarItem(
         "#/login",
-        "LOG IN BEFORE THE BALL DROPS",
+        "- LOG -",
         "Rumor says your stats, match history, and unfinished glory are waiting here. Identification is optional, but bragging rights are not."
     );
 
     const navCredits = makeSidebarItem(
         "#/credits",
-        "WHO BUILT THIS THING?",
+        "- WHO -",
         "A suspiciously dedicated group of students claims responsibility. This page lists them before they disappear into internships."
     );
 
     const navProfile = makeSidebarItem(
         "#/profile",
-        "YOUR PONG DOSSIER",
+        "- YOU -",
         "Win rate, unexpected defeats, and that one unbelievable comeback: everything is neatly archived, as if you were important."
     );
 

@@ -183,12 +183,12 @@ syncProfileBtn.onclick = async () => {
 }
 
 function createMatchTitle(state: GameState): HTMLDivElement {
-    const main = el("div", `w-auto h-[50px] grid grid-cols-[20%_60%_20%] h-[100px] border-2`);
+    const main = el("div", `w-auto h-[50px] grid grid-cols-[auto_1fr_auto] h-[100px] border-2 px-6`);
 
     const tCode = el("div", `flex flex-col items-end justify-center font-arcade-italic`, text(`Code :`), el("br"), text(`${state.stats.tournamentCode}`));
 
     const middle = el("div", `flex flex-col items-center justify-center font-arcade`, 
-        el("h1", `text-4xl xl:text-6xl xxl:text-8xl`, text(`${state.stats.tournamentName}`)), el("br"), el("h3", "text-sm", text(`A ${state.stats.tournamentMode} Tournament !`)));
+        el("h1", `text-3xl xl:text-5xl xxl:text-7xl`, text(`${state.stats.tournamentName}`)), el("br"), el("h3", "text-sm", text(`A ${state.stats.tournamentMode} Tournament !`)));
 
     const status = el("div", `flex flex-col items-start text-right justify-center font-arcade-italic`, text(`ROUND : ${state.stats.matchRound}`), el("br"), text(`${state.stats.matchStatus}`));
 

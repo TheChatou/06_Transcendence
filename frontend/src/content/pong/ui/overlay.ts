@@ -29,20 +29,54 @@ export class domOverlayManager {
                 return b;
             }
             case "WAITING": {
-                const wrap = el("div", "text-center");
-                const lbl = el("div", "text-xl mb-2");
-                lbl.append(text("Waiting players…"));
+            const wrap = el("div", "isolate text-center flex flex-col items-center gap-3 font-modern-type");
 
-                const status = el("div", "text-sm");
-                status.append(
-                    text(`P1 Ready: ${state.ready.p1 ? "✅" : "❌"} | P2 Ready: ${state.ready.p2 ? "✅" : "❌"}`)
-                );
-                wrap.append(lbl, status);
+            // Titre / consigne
+            const lbl = el("div", "text-xl");
+            lbl.append(text("Press to start"));
 
-                return wrap;
+            const hint = el("div", "text-sm opacity-100");
+            hint.append(text("Each player: press your start key"));
+
+            // Ligne P1 / P2
+            const row = el("div", "mt-2 flex items-start justify-center gap-10");
+
+            function playerBlock(pid: "p1" | "p2", title: string, imgSrc: string, ready: boolean): HTMLElement {
+                const col = el("div", "flex flex-col items-center gap-2");
+
+                const pLbl = el("div", "text-sm font-bold tracking-wide");
+                pLbl.append(text(title));
+
+                const imgWrap = el("div", `bg-none p-2`);
+
+                const img = el(
+                "img",
+                `h-16 w-auto block select-none pointer-events-none
+                mix-blend-multiply ${ready ? "opacity-100" : "opacity-25"} transition-opacity duration-200`
+                ) as HTMLImageElement;
+                img.src = imgSrc;
+                img.alt = `${title} start keys`;
+
+                imgWrap.append(img);
+                col.append(pLbl, imgWrap);
+
+                const status = el("div", `text-xs ${ready ? "opacity-90" : "opacity-60"}`);
+                status.append(text(ready ? "✅" : "❌"));
+                col.append(status);
+
+                return col;
+            }
+
+            const p1 = playerBlock("p1", "P1", "/imgs/w.png", !!state.ready.p1);
+            const p2 = playerBlock("p2", "P2", "/imgs/up.png", !!state.ready.p2);
+
+            row.append(p1, p2);
+            wrap.append(lbl, hint, row);
+
+            return wrap;
             }
             case "COUNTDOWN": {
-                const c = el("div", "text-6xl font-bold font-jmh pointer-events-none");
+                const c = el("div", "text-9xl font-superretro pointer-events-none");
                 c.textContent = String(this.countdownLeft ?? 3);
                 return c;
             }
@@ -77,7 +111,7 @@ export class domOverlayManager {
             }
             case "GAMEOVER": {
                 const wrap = el("div", "text-center");
-                const score = el("div", "text-9xl mb-2");
+                const score = el("div", "font-superretro text-9xl mb-2");
                 score.append(
                     text(`${state.stats.p1.score} - ${state.stats.p2.score}`)
                 );
@@ -101,7 +135,7 @@ export class domOverlayManager {
             }
             case "SCORED": {
                 const wrap = el("div", "text-center");
-                const score = el("div", "text-9xl mb-2");
+                const score = el("div", "font-superretro text-9xl mb-2");
                 score.append(
                     text(`${state.stats.p1.score} - ${state.stats.p2.score}`)
                 );
