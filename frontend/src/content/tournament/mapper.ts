@@ -7,8 +7,8 @@ import type { MatchStats, PlayerMatchStats, LiveMatchStats } from "../pong/game/
 function userFromApi(apiUser: ApiMatchUser): User {
   return {
     userId: apiUser.userId,
-    userName: apiUser.alias || apiUser.username,  // Utiliser l'alias en priorité
-    alias: apiUser.alias || undefined,
+    userName: apiUser.username,
+    alias: undefined,
     avatarUrl: apiUser.avatarUrl || null,
     createdAt: "",
     updatedAt: "",

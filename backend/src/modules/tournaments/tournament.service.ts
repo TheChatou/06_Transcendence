@@ -120,7 +120,6 @@ export class TournamentService {
           select: {
             id: true,
             username: true,
-            alias: true,
             avatarUrl: true
           }
         },
@@ -130,7 +129,6 @@ export class TournamentService {
               select: {
                 id: true,
                 username: true,
-                alias: true,
                 avatarUrl: true,
                 playerRef: true
               }
@@ -139,7 +137,6 @@ export class TournamentService {
               select: {
                 id: true,
                 username: true,
-                alias: true,
                 avatarUrl: true,
                 playerRef: true
               }
@@ -148,7 +145,6 @@ export class TournamentService {
               select: {
                 id: true,
                 username: true,
-                alias: true,
                 avatarUrl: true
               }
             }
@@ -509,10 +505,7 @@ async joinByUserId(code: string, userId: string): Promise<TournamentResponse> {
   if (!tournament) throw new Error("Tournament not found");
   if (tournament.status !== "OPEN") throw new Error("Tournament is not open for registration");
 
-  const user = await prisma.user.findUnique({ 
-    where: { id: userId },
-    select: { id: true, username: true, alias: true }
-  });
+  const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) throw new Error("User not found");
 
   const alreadyJoined = tournament.matches.some(
@@ -530,28 +523,19 @@ async joinByUserId(code: string, userId: string): Promise<TournamentResponse> {
     throw new Error("Tournament is full");
   }
 
-  // Use alias if available, otherwise use username
-  const displayName = user.alias || user.username;
-
   let assigned = false;
   for (const match of tournament.matches) {
     if (!match.p1UserId) {
       await prisma.match.update({
         where: { id: match.id },
-        data: { 
-          p1UserId: user.id,
-          p1Ref: displayName
-        },
+        data: { p1UserId: user.id },
       });
       assigned = true;
       break;
     } else if (!match.p2UserId) {
       await prisma.match.update({
         where: { id: match.id },
-        data: { 
-          p2UserId: user.id,
-          p2Ref: displayName
-        },
+        data: { p2UserId: user.id },
       });
       assigned = true;
       break;

@@ -77,7 +77,7 @@ export function createProfileViewWindow(): ProfileViewWindow {
 	dashboard.append(last7days, lastScores, last3Matches, snakeStats);
 
 	// isSelf stuff
-	const isSelf = el("div", "items-center justify-center");
+	const isSelf = el("div", "");
 
 	sections.append(headSection, dashboard, isSelf);
 	root.append(sections);

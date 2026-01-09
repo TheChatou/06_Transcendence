@@ -12,8 +12,7 @@ export type MatchStatus =
 export interface ApiMatchUser {
   userId: string;
   username: string;
-  alias?: string | null;          // AJOUT : Alias pour les tournois
-  avatarUrl?: string | null;      // AJOUT : Avatar
+  avatarUrl?: string | null;  // AJOUT : Avatar
 
   score: number;                  // 0 | 1 | 2 | 3
   maxWins: number;                // max points consécutifs

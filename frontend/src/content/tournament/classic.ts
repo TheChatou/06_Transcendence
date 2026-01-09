@@ -13,10 +13,8 @@ function isUserInTournament(t: Tournament, userName: string): boolean {
 
   return t.matches.some(
     (m) =>
-      m.p1User?.user?.userName === userName ||
-      m.p2User?.user?.userName === userName ||
-      m.p1User?.user?.alias === userName ||
-      m.p2User?.user?.alias === userName
+      m.p1User?.user.userName === userName ||
+      m.p2User?.user.userName === userName
   );
 }
 
@@ -322,8 +320,7 @@ export function classicTournament(): HTMLElement {
         return;
       }
 
-      // Ne pas essayer d'ajouter des joueurs si le tournoi n'est pas OPEN
-      if (tClassicDatas.status !== "OPEN") {
+      if (tClassicDatas.creatorId) {
         const view = renderTournamentView(tClassicDatas);
         container.append(view);
         return container;
@@ -333,7 +330,7 @@ export function classicTournament(): HTMLElement {
       // rendre la callback async permet d'utiliser await ici sans rendre classicTournament async
       getLoggedName().then(async (name) => {
         if (!name) return;
-        if (isUserInTournament(tClassicDatas, tClassicDatas.creatorName ?? "")) return;
+        if (isUserInTournament(tClassicDatas, tClassicDatas.creatorName)) return;
 
         try {
           await addUserAsPlayerToTournament(tCode, name, tClassicDatas);

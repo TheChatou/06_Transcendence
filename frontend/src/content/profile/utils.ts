@@ -1,4 +1,3 @@
-import { el } from "../home.ts";
 import { pongAlert } from "../utils/alertBox.ts";
 import { apiFetch } from "../utils/apiFetch.ts";
 
@@ -273,22 +272,20 @@ export function setupSelfMode(
     });
 
     // Profile options: settings, logout, delete account
-    const settingsBtn = document.createElement("button") as HTMLButtonElement;
-    settingsBtn.className = "btn-click mx-2";
+    const settingsBtn = document.createElement("a") as HTMLAnchorElement;
+    settingsBtn.className = "big-link cursor-pointer";
+    settingsBtn.href = "#/settings";
     settingsBtn.textContent = "Edit Profile";
-    settingsBtn.onclick = () => {
-        window.location.href = "#/settings";
-    }
 
     const logoutBtn = document.createElement("button") as HTMLButtonElement;
-    logoutBtn.className = "btn-click mx-2";
+    logoutBtn.className = "big-link";
     logoutBtn.textContent = "Logout";
     logoutBtn.onclick = () => {
         logout();
     };
 
     const deleteButton = document.createElement("button") as HTMLButtonElement;
-    deleteButton.className = "btn-click mx-2";
+    deleteButton.className = "big-link";
     deleteButton.textContent = "Supprimer mon compte";
     deleteButton.onclick = async () => {
         const sure = confirm(
@@ -307,13 +304,12 @@ export function setupSelfMode(
     const privacyBox = document.createElement("div");
     privacyBox.className = "mt-6 flex flex-col gap-2 border-t border-zinc-700 pt-4";
     const privacyTitle = document.createElement("h3");
-    privacyTitle.className = "font-vintage-warehouse uppercase text-2xl";
+    privacyTitle.className = "font-royalvogue text-2xl";
     privacyTitle.textContent = "Privacy / My Datas";
 
     // Blockchain stats button
-    const privacyBtns = el("div", "items-center grid grid-cols-2 gap-8");
     const getBlockchainBtn = document.createElement("button") as HTMLButtonElement;
-    getBlockchainBtn.className = "biggy-btn-click";
+    getBlockchainBtn.className = "big-link";
     getBlockchainBtn.textContent = "Stats from Blockchain";
     getBlockchainBtn.onclick = async () => {
         try {
@@ -375,8 +371,8 @@ export function setupSelfMode(
 
     // View personal data
     const viewDataBtn = document.createElement("button") as HTMLButtonElement;
-    viewDataBtn.className = "biggy-btn-click";
-    viewDataBtn.textContent = "Check on my personal datas";
+    viewDataBtn.className = "big-link";
+    viewDataBtn.textContent = "Check on my personal datas.";
     viewDataBtn.onclick = async () => {
         try {
             const res = await apiFetch("/api/privacy/me", { credentials: "include" });
@@ -400,8 +396,8 @@ export function setupSelfMode(
 
     // Anonymize account
     const anonymizeBtn = document.createElement("button") as HTMLButtonElement;
-    anonymizeBtn.className = "biggy-btn-click";
-    anonymizeBtn.textContent = "Anonymize my account";
+    anonymizeBtn.className = "big-link";
+    anonymizeBtn.textContent = "Anonymiser mon compte";
     anonymizeBtn.onclick = async () => {
         const sure = confirm(
             "Votre pseudonyme, email, avatar et identifiants seront anonymisés.\n" +
@@ -428,25 +424,20 @@ export function setupSelfMode(
 
     // Clear local storage
     const clearLocalBtn = document.createElement("button") as HTMLButtonElement;
-    clearLocalBtn.className = "biggy-btn-click";
-    clearLocalBtn.textContent = "Delete localStorage";
+    clearLocalBtn.className = "big-link";
+    clearLocalBtn.textContent = "Supprimer mes données locales (navigateur)";
     clearLocalBtn.onclick = () => {
         localStorage.clear();
         sessionStorage.clear();
         pongAlert("localStorage / sessionStorage cleaned.", "info");
     };
 
-    privacyBtns.append(getBlockchainBtn, viewDataBtn, anonymizeBtn, clearLocalBtn);
-
-    privacyBox.append(privacyTitle, privacyBtns);
+    privacyBox.append(privacyTitle, getBlockchainBtn, viewDataBtn, anonymizeBtn, clearLocalBtn);
     // Insert the action buttons and privacy controls into the editBox.
     // Clear previous content and make the box visible
-
-    const settingsBox = el("div", "items-center justify-center flex flex-row");
-    settingsBox.append(settingsBtn, logoutBtn, deleteButton);
     editBox.innerHTML = "";
     editBox.classList.remove("hidden");
-    editBox.append(settingsBox, privacyBox);
+    editBox.append(settingsBtn, logoutBtn, deleteButton, privacyBox);
 
     // Friends: Add friend input and button
     const addFriendBox = document.createElement("div");
