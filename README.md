@@ -1,6 +1,8 @@
-# 🕹️ Transcendence  
+# 🕹️ ft_transcendence  
 *Plateforme Web multijoueur en temps réel — jeux, tournois, profils, onboarding guidé.*
-
+<p align="center">
+  <img src="docs/transcendence/prevStrip.png" width="900">
+</p>
 ---
 
 ## 🧠 Mon rôle & implications techniques
