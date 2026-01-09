@@ -148,8 +148,7 @@ make prod
 
 
 3) **Ouvrir**
-```> https://localhost:8080
-```
+> https://localhost:8080
 
 Note : selon votre machine, il peut être nécessaire de mettre à jour Node.js. Le projet a été développé avec une version récente, et nvm est recommandé :
 ```bash
