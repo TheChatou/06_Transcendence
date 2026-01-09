@@ -87,7 +87,7 @@ Cette approche permet de poser immédiatement le ton : on n’est pas sur une si
 - Gestion de l’identité utilisateur (GDPR)
 - Interface pensée pour rester lisible, même avec beaucoup d’informations
 
-## Jeux — Pong & modules expérimentaux
+## Jeux — Pong & Second jeu bonus : CrossWord Snake
 
 <p align="center">
   <a href="docs/transcendence/tGame.mp4">
